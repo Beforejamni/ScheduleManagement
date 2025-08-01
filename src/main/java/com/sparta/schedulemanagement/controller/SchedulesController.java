@@ -6,6 +6,10 @@ import com.sparta.schedulemanagement.dto.schedulesdto.SchedulesResponseDto;
 import com.sparta.schedulemanagement.dto.schedulesdto.UpdateScheduleRequestDto;
 import com.sparta.schedulemanagement.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,5 +56,19 @@ public class SchedulesController {
 
 
         return new ResponseEntity<>(scheduleService.updateTodo(id, dto), HttpStatus.OK);
+    }
+
+    //페이징네이션
+    @GetMapping("/param")
+    public ResponseEntity<Page<SchedulesResponseDto>> paginationToDo
+        (@RequestParam(defaultValue = "0") int page ,
+         @RequestParam(defaultValue = "10") int size) {
+
+        PageRequest pageRequest = PageRequest.of(page, size);
+
+        Page<SchedulesResponseDto> pageSchedule = scheduleService.getPage(pageRequest);
+
+        return new ResponseEntity<>(pageSchedule , HttpStatus.OK);
+
     }
 }

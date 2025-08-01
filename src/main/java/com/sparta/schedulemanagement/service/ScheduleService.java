@@ -6,6 +6,8 @@ import com.sparta.schedulemanagement.entity.Schedules;
 import com.sparta.schedulemanagement.repository.ScheduleRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,5 +58,9 @@ public class ScheduleService {
         schedule.updateTodo(dto);
 
         return new SchedulesResponseDto(schedule);
+    }
+
+    public Page<SchedulesResponseDto> getPage(PageRequest pageRequest) {
+        return scheduleRepository.findAll(pageRequest).map(SchedulesResponseDto :: toDto);
     }
 }

@@ -36,4 +36,9 @@ public class CommentsResponseDto {
         this.updatedAt = comments.getUpdatedAt();
 
     }
+
+    public static CommentsResponseDto toDto(Comments comments) {
+
+        return new CommentsResponseDto(comments);
+    }
 }

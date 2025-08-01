@@ -55,11 +55,6 @@ public class ScheduleService {
 
         schedule.updateTodo(dto);
 
-        return new SchedulesResponseDto(schedule.getId(),
-                                            schedule.getTitle(),
-                                            schedule.getContents(),
-                                            schedule.getAuthorName(),
-                                            schedule.getCreatedAt(),
-                                            schedule.getUpdatedAt());
+        return new SchedulesResponseDto(schedule);
     }
 }

@@ -1,6 +1,7 @@
 package com.sparta.schedulemanagement.entity;
 
 import com.sparta.schedulemanagement.dto.commentsdto.CreateCommentsRequsetDto;
+import com.sparta.schedulemanagement.dto.commentsdto.UpdateCommentRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -31,4 +32,9 @@ public class Comments extends BaseTimeEntity{
         this.authorName = dto.getAuthorName();
     }
 
+    public void updateComment(UpdateCommentRequestDto dto) {
+        if(dto.getComment() != null && !dto.getComment().isBlank()) {
+            this.comment = dto.getComment();
+        }
+    }
 }

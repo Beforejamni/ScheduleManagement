@@ -31,6 +31,16 @@ public class SchedulesResponseDto {
         this.updatedAt = updatedAt;
     }
 
+    public SchedulesResponseDto(Schedules schedules) {
+        this.id= schedules.getId();
+        this.title = schedules.getTitle();
+        this.contents = schedules.getContents();
+        this.authorName = schedules.getAuthorName();
+        this.createdAt = schedules.getCreatedAt();
+        this.updatedAt = schedules.getUpdatedAt();
+
+    }
+
     public static SchedulesResponseDto toDto(Schedules schedules) {
         return new SchedulesResponseDto(schedules.getId(),
                                         schedules.getTitle(),

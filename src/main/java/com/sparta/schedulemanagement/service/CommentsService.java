@@ -5,7 +5,9 @@ import com.sparta.schedulemanagement.dto.commentsdto.CommentsResponseDto;
 import com.sparta.schedulemanagement.dto.commentsdto.CreateCommentsRequsetDto;
 import com.sparta.schedulemanagement.dto.commentsdto.UpdateCommentRequestDto;
 import com.sparta.schedulemanagement.entity.Comments;
+import com.sparta.schedulemanagement.entity.Schedules;
 import com.sparta.schedulemanagement.repository.CommentRepository;
+import com.sparta.schedulemanagement.repository.ScheduleRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,19 +19,27 @@ import java.util.List;
 public class CommentsService {
 
     private final CommentRepository commentRepository;
+    private final ScheduleRepository scheduleRepository;
 
-    public CommentsResponseDto saveComment (CreateCommentsRequsetDto dto) {
+
+    //댓글 작성
+    public CommentsResponseDto saveComment (CreateCommentsRequsetDto dto, Long schedules_id) {
+
+        Schedules schedules = scheduleRepository.findByIdOrElseThrow(schedules_id);
 
         Comments comments = new Comments(dto);
+
+        comments.setSchedule(schedules);
 
         Comments savedComments = commentRepository.save(comments);
 
         return new CommentsResponseDto(savedComments);
     }
 
+    //댓글 찾기
     public CommentsResponseDto findCommentById(Long id) {
         
-        return new CommentsResponseDto(commentRepository.findByIdOrElseThrow(id));
+        return new CommentsResponseDto( commentRepository.findByIdOrElseThrow(id));
     }
 
     public List<CommentsResponseDto> findComments() {
@@ -42,6 +52,8 @@ public class CommentsService {
         commentRepository.deleteById(id);
     }
 
+
+    //댓글 수정
     @Transactional
     public CommentsResponseDto updateComment(Long id, UpdateCommentRequestDto dto) {
 

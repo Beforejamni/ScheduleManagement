@@ -19,6 +19,10 @@ public class Comments extends BaseTimeEntity{
 
     private String authorName;
 
+    @ManyToOne()
+    @JoinColumn(name = "schedules_id", nullable = false)
+    private Schedules schedules;
+
     public Comments() {
     }
 
@@ -36,5 +40,9 @@ public class Comments extends BaseTimeEntity{
         if(dto.getComment() != null && !dto.getComment().isBlank()) {
             this.comment = dto.getComment();
         }
+    }
+
+    public void setSchedule(Schedules schedules) {
+        this.schedules = schedules;
     }
 }

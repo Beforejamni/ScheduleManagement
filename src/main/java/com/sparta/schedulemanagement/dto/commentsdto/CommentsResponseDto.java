@@ -39,6 +39,6 @@ public class CommentsResponseDto {
 
     public static CommentsResponseDto toDto(Comments comments) {
 
-        return new CommentsResponseDto(comments);
+        return new CommentsResponseDto(comments );
     }
 }

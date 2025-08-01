@@ -15,5 +15,4 @@ public class UpdateScheduleRequestDto {
         this.contents = contents;
     }
 
-
 }

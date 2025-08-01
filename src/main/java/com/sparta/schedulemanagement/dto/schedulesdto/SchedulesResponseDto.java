@@ -32,7 +32,7 @@ public class SchedulesResponseDto {
     }
 
     public SchedulesResponseDto(Schedules schedules) {
-        this.id= schedules.getId();
+        this.id= schedules.getSchedulesId();
         this.title = schedules.getTitle();
         this.contents = schedules.getContents();
         this.authorName = schedules.getAuthorName();
@@ -42,7 +42,7 @@ public class SchedulesResponseDto {
     }
 
     public static SchedulesResponseDto toDto(Schedules schedules) {
-        return new SchedulesResponseDto(schedules.getId(),
+        return new SchedulesResponseDto(schedules.getSchedulesId(),
                                         schedules.getTitle(),
                                         schedules.getContents(),
                                         schedules.getAuthorName(),

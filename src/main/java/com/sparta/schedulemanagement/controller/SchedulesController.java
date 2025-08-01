@@ -4,12 +4,11 @@ package com.sparta.schedulemanagement.controller;
 import com.sparta.schedulemanagement.dto.schedulesdto.CreateScheduleRequestDto;
 import com.sparta.schedulemanagement.dto.schedulesdto.SchedulesResponseDto;
 import com.sparta.schedulemanagement.dto.schedulesdto.UpdateScheduleRequestDto;
+import com.sparta.schedulemanagement.repository.ScheduleRepository;
 import com.sparta.schedulemanagement.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +22,7 @@ import java.util.List;
 public class SchedulesController {
 
     private final ScheduleService scheduleService;
+    private final ScheduleRepository scheduleRepository;
 
     //저장
     @PostMapping
@@ -70,5 +70,14 @@ public class SchedulesController {
 
         return new ResponseEntity<>(pageSchedule , HttpStatus.OK);
 
+    }
+
+    //일정 삭제 -> 댓글 삭제 같이
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTodo( @PathVariable Long id) {
+
+        scheduleRepository.deleteById(id);
+
+       return new  ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

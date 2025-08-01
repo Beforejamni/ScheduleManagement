@@ -18,38 +18,33 @@ public class ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
 
+
+    //저장
     public SchedulesResponseDto saveToDo ( String title , String contents, String authorName) {
 
         Schedules schedules = new Schedules(title, contents, authorName);
 
         Schedules savedSchedules = scheduleRepository.save(schedules);
 
-        return new SchedulesResponseDto(savedSchedules.getId(),
-                                        savedSchedules.getTitle(),
-                                        savedSchedules.getContents(),
-                                        savedSchedules.getAuthorName(),
-                                        savedSchedules.getCreatedAt(),
-                                        savedSchedules.getUpdatedAt()
-        );
+        return new SchedulesResponseDto(savedSchedules);
     }
 
-
+    //단 건 조회
     public SchedulesResponseDto findToDoById(Long id) {
 
-        Schedules schedules = scheduleRepository.findByIdOrElseThrow(id);
 
-        return new SchedulesResponseDto(schedules.getId(),
-                                        schedules.getTitle(),
-                                        schedules.getContents(),
-                                        schedules.getAuthorName(),
-                                        schedules.getCreatedAt(),
-                                        schedules.getUpdatedAt());
+        return new SchedulesResponseDto(scheduleRepository.findByIdOrElseThrow(id));
     }
 
+
+    //전체 조회
     public List<SchedulesResponseDto> findTodosAll() {
 
         return scheduleRepository.findAll().stream().map(SchedulesResponseDto ::toDto).toList();
     }
+
+
+    //댓글수정
     @Transactional
     public SchedulesResponseDto updateTodo(Long id , UpdateScheduleRequestDto dto) {
 
@@ -60,7 +55,10 @@ public class ScheduleService {
         return new SchedulesResponseDto(schedule);
     }
 
+
+    //페이징 처리
     public Page<SchedulesResponseDto> getPage(PageRequest pageRequest) {
         return scheduleRepository.findAll(pageRequest).map(SchedulesResponseDto :: toDto);
     }
+
 }

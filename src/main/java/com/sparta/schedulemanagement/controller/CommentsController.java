@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("/schedules/{schedules_id}/comments")
 @RequiredArgsConstructor
 public class CommentsController {
 
@@ -22,9 +22,11 @@ public class CommentsController {
 
     //저장 기능
     @PostMapping
-    public ResponseEntity<CommentsResponseDto> saveComment (@RequestBody CreateCommentsRequsetDto dto) {
+    public ResponseEntity<CommentsResponseDto> saveComment (
+            @PathVariable Long schedules_id,
+            @RequestBody CreateCommentsRequsetDto dto) {
 
-        CommentsResponseDto commentsResponseDto = commentsService.saveComment(dto);
+        CommentsResponseDto commentsResponseDto = commentsService.saveComment(dto ,schedules_id);
 
         return new ResponseEntity<>( commentsResponseDto, HttpStatus.CREATED);
     }

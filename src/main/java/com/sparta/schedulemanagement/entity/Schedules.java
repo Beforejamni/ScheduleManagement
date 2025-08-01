@@ -1,8 +1,6 @@
 package com.sparta.schedulemanagement.entity;
 
-import com.sparta.schedulemanagement.entity.BaseTimeEntity;
-
-import com.sparta.schedulemanagement.dto.UpdateScheduleRequestDto;
+import com.sparta.schedulemanagement.dto.schedulesdto.UpdateScheduleRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 

@@ -1,7 +1,7 @@
 package com.sparta.schedulemanagement.service;
 
-import com.sparta.schedulemanagement.dto.SchedulesResponseDto;
-import com.sparta.schedulemanagement.dto.UpdateScheduleRequestDto;
+import com.sparta.schedulemanagement.dto.schedulesdto.SchedulesResponseDto;
+import com.sparta.schedulemanagement.dto.schedulesdto.UpdateScheduleRequestDto;
 import com.sparta.schedulemanagement.entity.Schedules;
 import com.sparta.schedulemanagement.repository.ScheduleRepository;
 import jakarta.transaction.Transactional;
@@ -52,8 +52,6 @@ public class ScheduleService {
     public SchedulesResponseDto updateTodo(Long id , UpdateScheduleRequestDto dto) {
 
         Schedules schedule = scheduleRepository.findByIdOrElseThrow(id);
-
-
 
         schedule.updateTodo(dto);
 

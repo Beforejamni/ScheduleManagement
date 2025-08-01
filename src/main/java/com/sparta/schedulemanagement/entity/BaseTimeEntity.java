@@ -1,4 +1,4 @@
-package com.sparta.schedulemanagement.Entity;
+package com.sparta.schedulemanagement.entity;
 
 
 import jakarta.persistence.*;

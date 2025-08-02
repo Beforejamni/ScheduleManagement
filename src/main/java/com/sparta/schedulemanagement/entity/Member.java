@@ -5,6 +5,8 @@ import com.sparta.schedulemanagement.dto.memberDto.MemberRequestBody;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Table(name = "members")
@@ -20,6 +22,9 @@ public class Member extends BaseTimeEntity {
 
     @Column(nullable = false)
     private String email;
+
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ConnectMemberToSchedules> schedulesList;
 
 
     public Member (String membername, String email) {

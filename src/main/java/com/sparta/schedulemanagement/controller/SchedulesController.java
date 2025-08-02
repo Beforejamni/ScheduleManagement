@@ -26,7 +26,8 @@ public class SchedulesController {
 
     //저장
     @PostMapping
-    public ResponseEntity<SchedulesResponseDto> saveToDo (@RequestBody CreateScheduleRequestDto requestDto){
+    public ResponseEntity<SchedulesResponseDto> saveToDo (
+            @RequestBody CreateScheduleRequestDto requestDto){
 
         SchedulesResponseDto schedulesResponseDto = scheduleService.saveToDo(requestDto.getTitle(),
                                                                             requestDto.getContents(),

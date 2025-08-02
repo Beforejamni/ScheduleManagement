@@ -28,8 +28,12 @@ public class Schedules extends BaseTimeEntity {
     @Column(nullable = false)
     private String authorName;
 
+
     @OneToMany(mappedBy = "schedules",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comments> commentsList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "schedules",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ConnectMemberToSchedules> memberList;
 
     public Schedules( String title, String contents, String authorName){
         this.title = title;
